@@ -1,13 +1,13 @@
 {
     "name": {
-        "ar": "أورا",
-        "en": "Aura"
+        "ar": "جيومي",
+        "en": "Geomi"
     },
     "description": {
         "ar": "ثيم فاخر بطابع Luxury لمتاجر الأزياء والموضة والجمال، بتصميم عصري داكن/عاجي بلمسات ذهبية وخط عربي مميز.",
         "en": "A luxury, editorial theme for fashion, beauty and lifestyle stores — warm ivory & near-black surfaces with a gold accent and a distinctive Arabic display face."
     },
-    "repository": "https://github.com/geomistore-web/aura-theme",
+    "repository": "https://github.com/geomistore-web/Geomi-theme",
        "author_email": "Abunorh.ksa@gmail.com",
        "support_url": "https://geomistore.com",
 
@@ -41,7 +41,7 @@
         {
             "id": "topnav_is_dark",
             "label": "الشريط العلوي بخلفية داكنة",
-            "description": "يطابق طابع أورا الفاخر — يُفضّل إبقاؤه مفعّلاً",
+            "description": "يطابق طابع جيومي الفاخر — يُفضّل إبقاؤه مفعّلاً",
             "type": "boolean",
             "format": "switch",
             "value": true,
@@ -99,10 +99,10 @@
 
     "components": [
         {
-            "key": "aura-hero-banner-0001",
+            "key": "Geomi-hero-banner-0001",
             "title": {
                 "ar": "بانر رئيسي فاخر",
-                "en": "Aura Hero Banner"
+                "en": "Geomi Hero Banner"
             },
             "icon": "sicon-image-carousel",
             "path": "home.hero-banner",
@@ -198,10 +198,10 @@
             ]
         },
         {
-            "key": "aura-split-promo-0001",
+            "key": "Geomi-split-promo-0001",
             "title": {
                 "ar": "بانر مزدوج (عرض مقسم)",
-                "en": "Aura Split Promo"
+                "en": "Geomi Split Promo"
             },
             "icon": "sicon-image",
             "path": "home.split-promo",
@@ -273,10 +273,10 @@
             ]
         },
         {
-            "key": "aura-newsletter-0001",
+            "key": "Geomi-newsletter-0001",
             "title": {
                 "ar": "نشرة بريدية",
-                "en": "Aura Newsletter"
+                "en": "Geomi Newsletter"
             },
             "icon": "sicon-email",
             "path": "home.newsletter",
@@ -290,7 +290,7 @@
                     "multilanguage": true,
                     "format": "text",
                     "required": true,
-                    "value": "انضمي إلى عالم أورا",
+                    "value": "انضمي إلى عالم جيومي",
                     "maxLength": 60
                 },
                 {
