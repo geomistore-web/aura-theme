@@ -8,9 +8,8 @@
         "en": "A luxury, editorial theme for fashion, beauty and lifestyle stores — warm ivory & near-black surfaces with a gold accent and a distinctive Arabic display face."
     },
     "repository": "https://github.com/geomistore-web/Geomi-theme",
-       "author_email": "Abunorh.ksa@gmail.com",
-       "support_url": "https://geomistore.com",
-
+    "author_email": "Abunorh.ksa@gmail.com",
+    "support_url": "https://geomistore.com",
     "features": [
         "fonts",
         "color",
@@ -20,9 +19,11 @@
         "component-square-photos",
         "component-store-features",
         "component-fixed-products",
-        "component-testimonials"
+        "component-testimonials",
+        "mega-menu",
+        "component-featured-products",
+        "component-fixed-banner"
     ],
-
     "settings": [
         {
             "type": "static",
@@ -96,7 +97,6 @@
             "selected": true
         }
     ],
-
     "components": [
         {
             "key": "Geomi-hero-banner-0001",
@@ -132,7 +132,10 @@
                             "format": "image",
                             "required": true,
                             "description": "المقاس المناسب: 1600×900 بكسل",
-                            "settings": { "width": 1600, "height": 900 }
+                            "settings": {
+                                "width": 1600,
+                                "height": 900
+                            }
                         },
                         {
                             "type": "string",
@@ -187,10 +190,26 @@
                             "required": false,
                             "source": "custom",
                             "sources": [
-                                { "label": "منتج", "key": "products", "value": "products" },
-                                { "label": "تصنيف", "key": "categories", "value": "categories" },
-                                { "label": "التخفيضات", "key": "offers_link", "value": "offers_link" },
-                                { "label": "رابط خارجي", "key": "custom", "value": "custom" }
+                                {
+                                    "label": "منتج",
+                                    "key": "products",
+                                    "value": "products"
+                                },
+                                {
+                                    "label": "تصنيف",
+                                    "key": "categories",
+                                    "value": "categories"
+                                },
+                                {
+                                    "label": "التخفيضات",
+                                    "key": "offers_link",
+                                    "value": "offers_link"
+                                },
+                                {
+                                    "label": "رابط خارجي",
+                                    "key": "custom",
+                                    "value": "custom"
+                                }
                             ]
                         }
                     ]
@@ -230,7 +249,10 @@
                             "label": "الصورة",
                             "format": "image",
                             "required": true,
-                            "settings": { "width": 900, "height": 900 }
+                            "settings": {
+                                "width": 900,
+                                "height": 900
+                            }
                         },
                         {
                             "type": "string",
@@ -263,9 +285,21 @@
                             "required": false,
                             "source": "custom",
                             "sources": [
-                                { "label": "منتج", "key": "products", "value": "products" },
-                                { "label": "تصنيف", "key": "categories", "value": "categories" },
-                                { "label": "رابط خارجي", "key": "custom", "value": "custom" }
+                                {
+                                    "label": "منتج",
+                                    "key": "products",
+                                    "value": "products"
+                                },
+                                {
+                                    "label": "تصنيف",
+                                    "key": "categories",
+                                    "value": "categories"
+                                },
+                                {
+                                    "label": "رابط خارجي",
+                                    "key": "custom",
+                                    "value": "custom"
+                                }
                             ]
                         }
                     ]
