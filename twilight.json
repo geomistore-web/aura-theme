@@ -1,0 +1,310 @@
+{
+    "name": {
+        "ar": "أورا",
+        "en": "Aura"
+    },
+    "description": {
+        "ar": "ثيم فاخر بطابع Luxury لمتاجر الأزياء والموضة والجمال، بتصميم عصري داكن/عاجي بلمسات ذهبية وخط عربي مميز.",
+        "en": "A luxury, editorial theme for fashion, beauty and lifestyle stores — warm ivory & near-black surfaces with a gold accent and a distinctive Arabic display face."
+    },
+    "repository": "REPLACE_WITH_YOUR_GITHUB_REPO_URL",
+    "author_email": "REPLACE_WITH_YOUR_SUPPORT_EMAIL",
+    "support_url": "REPLACE_WITH_YOUR_SUPPORT_URL",
+
+    "features": [
+        "fonts",
+        "color",
+        "breadcrumb",
+        "unite-cards-height",
+        "filters",
+        "component-square-photos",
+        "component-store-features",
+        "component-fixed-products",
+        "component-testimonials"
+    ],
+
+    "settings": [
+        {
+            "type": "static",
+            "format": "title",
+            "id": "static-label-header",
+            "value": "<div class='rounded-lg' style='background-color:#141210;display:flex;justify-content:center;align-items:center;padding:15px;margin-bottom:20px !important;flex-direction:column;gap:15px;'><h6 style='color:#e9c98a;font-size:15px;font-weight:bold;'>خيارات الهيدر</h6></div>"
+        },
+        {
+            "id": "header_is_sticky",
+            "label": "تثبيت القائمة الرئيسية أعلى الصفحة عند التمرير",
+            "type": "boolean",
+            "format": "switch",
+            "value": true,
+            "selected": true
+        },
+        {
+            "id": "topnav_is_dark",
+            "label": "الشريط العلوي بخلفية داكنة",
+            "description": "يطابق طابع أورا الفاخر — يُفضّل إبقاؤه مفعّلاً",
+            "type": "boolean",
+            "format": "switch",
+            "value": true,
+            "selected": true
+        },
+        {
+            "id": "important_links",
+            "label": "عرض روابط الصفحات الهامة في الشريط العلوي",
+            "type": "boolean",
+            "format": "switch",
+            "value": true,
+            "selected": true
+        },
+        {
+            "type": "static",
+            "id": "static-line-1",
+            "format": "line"
+        },
+        {
+            "type": "static",
+            "format": "title",
+            "id": "static-label-footer",
+            "value": "<div class='rounded-lg' style='background-color:#141210;display:flex;justify-content:center;align-items:center;padding:15px;margin-bottom:20px !important;flex-direction:column;gap:15px;'><h6 style='color:#e9c98a;font-size:15px;font-weight:bold;'>خيارات الفوتر</h6></div>"
+        },
+        {
+            "id": "footer_is_dark",
+            "label": "الفوتر بخلفية داكنة",
+            "type": "boolean",
+            "format": "switch",
+            "value": true,
+            "selected": true
+        },
+        {
+            "type": "static",
+            "id": "static-line-2",
+            "format": "line"
+        },
+        {
+            "id": "product_index_show_breadcrumbs",
+            "label": "عرض مسار التنقل (Breadcrumb) في صفحة التصنيف",
+            "type": "boolean",
+            "format": "switch",
+            "value": true,
+            "selected": true
+        },
+        {
+            "id": "product_show_breadcrumbs",
+            "label": "عرض مسار التنقل (Breadcrumb) في صفحة المنتج",
+            "type": "boolean",
+            "format": "switch",
+            "value": true,
+            "selected": true
+        }
+    ],
+
+    "components": [
+        {
+            "key": "aura-hero-banner-0001",
+            "title": {
+                "ar": "بانر رئيسي فاخر",
+                "en": "Aura Hero Banner"
+            },
+            "icon": "sicon-image-carousel",
+            "path": "home.hero-banner",
+            "is_default": true,
+            "fields": [
+                {
+                    "type": "static",
+                    "format": "description",
+                    "id": "hero-note",
+                    "value": "<div>بانر رئيسي بعرض كامل مع تظليل داكن تلقائي فوق الصورة لضمان وضوح النص. المقاس المناسب للصورة: 1600×900 بكسل.</div>"
+                },
+                {
+                    "id": "slides",
+                    "type": "collection",
+                    "format": "collection",
+                    "required": true,
+                    "minLength": 1,
+                    "maxLength": 5,
+                    "label": "الشرائح",
+                    "item_label": "شريحة",
+                    "fields": [
+                        {
+                            "type": "string",
+                            "icon": "sicon-image",
+                            "id": "slides.image",
+                            "label": "صورة الخلفية",
+                            "format": "image",
+                            "required": true,
+                            "description": "المقاس المناسب: 1600×900 بكسل",
+                            "settings": { "width": 1600, "height": 900 }
+                        },
+                        {
+                            "type": "string",
+                            "icon": "sicon-format-text-alt",
+                            "id": "slides.eyebrow",
+                            "label": "نص علوي صغير",
+                            "multilanguage": true,
+                            "format": "text",
+                            "required": false,
+                            "placeholder": "مجموعة الخريف ٢٠٢٦",
+                            "maxLength": 60
+                        },
+                        {
+                            "type": "string",
+                            "icon": "sicon-typography",
+                            "id": "slides.title",
+                            "label": "العنوان الرئيسي",
+                            "multilanguage": true,
+                            "format": "text",
+                            "required": true,
+                            "placeholder": "فخامة تُصنع لتُروى",
+                            "maxLength": 80
+                        },
+                        {
+                            "type": "string",
+                            "icon": "sicon-typography",
+                            "id": "slides.description",
+                            "label": "وصف مختصر",
+                            "multilanguage": true,
+                            "format": "textarea",
+                            "required": false,
+                            "maxLength": 200
+                        },
+                        {
+                            "type": "string",
+                            "icon": "sicon-format-text-alt",
+                            "id": "slides.cta_text",
+                            "label": "نص الزر",
+                            "multilanguage": true,
+                            "format": "text",
+                            "required": false,
+                            "placeholder": "اكتشفي المجموعة",
+                            "maxLength": 30
+                        },
+                        {
+                            "type": "items",
+                            "icon": "sicon-link",
+                            "id": "slides.url",
+                            "label": "رابط الزر",
+                            "format": "variable-list",
+                            "searchable": true,
+                            "required": false,
+                            "source": "custom",
+                            "sources": [
+                                { "label": "منتج", "key": "products", "value": "products" },
+                                { "label": "تصنيف", "key": "categories", "value": "categories" },
+                                { "label": "التخفيضات", "key": "offers_link", "value": "offers_link" },
+                                { "label": "رابط خارجي", "key": "custom", "value": "custom" }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "aura-split-promo-0001",
+            "title": {
+                "ar": "بانر مزدوج (عرض مقسم)",
+                "en": "Aura Split Promo"
+            },
+            "icon": "sicon-image",
+            "path": "home.split-promo",
+            "is_default": true,
+            "fields": [
+                {
+                    "type": "static",
+                    "format": "description",
+                    "id": "split-promo-note",
+                    "value": "<div>قسمان جنبًا إلى جنب لعرض تشكيلتين أو عرضين مختلفين. المقاس المناسب لكل صورة: 900×900 بكسل.</div>"
+                },
+                {
+                    "id": "banners",
+                    "type": "collection",
+                    "format": "collection",
+                    "required": true,
+                    "minLength": 2,
+                    "maxLength": 2,
+                    "label": "البانرين",
+                    "item_label": "بانر",
+                    "fields": [
+                        {
+                            "type": "string",
+                            "icon": "sicon-image",
+                            "id": "banners.image",
+                            "label": "الصورة",
+                            "format": "image",
+                            "required": true,
+                            "settings": { "width": 900, "height": 900 }
+                        },
+                        {
+                            "type": "string",
+                            "icon": "sicon-typography",
+                            "id": "banners.title",
+                            "label": "العنوان",
+                            "multilanguage": true,
+                            "format": "text",
+                            "required": true,
+                            "maxLength": 60
+                        },
+                        {
+                            "type": "string",
+                            "icon": "sicon-format-text-alt",
+                            "id": "banners.cta_text",
+                            "label": "نص الزر",
+                            "multilanguage": true,
+                            "format": "text",
+                            "required": false,
+                            "placeholder": "تسوقي الآن",
+                            "maxLength": 30
+                        },
+                        {
+                            "type": "items",
+                            "icon": "sicon-link",
+                            "id": "banners.url",
+                            "label": "الرابط",
+                            "format": "variable-list",
+                            "searchable": true,
+                            "required": false,
+                            "source": "custom",
+                            "sources": [
+                                { "label": "منتج", "key": "products", "value": "products" },
+                                { "label": "تصنيف", "key": "categories", "value": "categories" },
+                                { "label": "رابط خارجي", "key": "custom", "value": "custom" }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "aura-newsletter-0001",
+            "title": {
+                "ar": "نشرة بريدية",
+                "en": "Aura Newsletter"
+            },
+            "icon": "sicon-email",
+            "path": "home.newsletter",
+            "is_default": true,
+            "fields": [
+                {
+                    "type": "string",
+                    "icon": "sicon-typography",
+                    "id": "heading",
+                    "label": "العنوان",
+                    "multilanguage": true,
+                    "format": "text",
+                    "required": true,
+                    "value": "انضمي إلى عالم أورا",
+                    "maxLength": 60
+                },
+                {
+                    "type": "string",
+                    "icon": "sicon-format-text-alt",
+                    "id": "description",
+                    "label": "وصف مختصر",
+                    "multilanguage": true,
+                    "format": "textarea",
+                    "required": false,
+                    "value": "اشتركي في نشرتنا لتصلك أحدث المجموعات والعروض الحصرية أولًا بأول.",
+                    "maxLength": 200
+                }
+            ]
+        }
+    ]
+}

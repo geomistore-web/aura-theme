@@ -1,0 +1,64 @@
+/* ===== Aura / base ===== */
+
+body {
+    background: var(--aura-bg);
+    color: var(--aura-ink);
+    font-family: 'Cairo', var(--font-main), sans-serif;
+}
+
+a { text-decoration: none; color: inherit; }
+
+.aura-eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: var(--aura-gold-deep);
+}
+.aura-eyebrow--ink { color: var(--aura-muted); }
+
+.aura-muted { color: var(--aura-muted); }
+
+.aura-link {
+    color: var(--aura-ink-soft);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.aura-badge {
+    position: absolute;
+    top: 14px;
+    inset-inline-end: 14px;
+    background: var(--aura-dark);
+    color: var(--aura-surface);
+    font-size: 11px;
+    padding: 5px 10px;
+    border-radius: 2px;
+    font-weight: 700;
+    z-index: 2;
+}
+
+.aura-section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 32px;
+}
+.aura-section-title {
+    font-family: 'Markazi Text', var(--font-display), serif;
+    font-weight: 600;
+    font-size: 34px;
+    color: var(--aura-ink);
+    margin: 0;
+}
+.aura-section-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--aura-ink-soft);
+}
+
+/* Lazy background images used by home blocks (square-photos, split-promo) */
+.lazy__bg, [data-bg] {
+    background-size: cover;
+    background-position: center;
+}

@@ -1,0 +1,42 @@
+/* ===== Aura / buttons ===== */
+
+.btn-aura-gold,
+.btn-aura-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 52px;
+    padding: 0 34px;
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.btn-aura-gold {
+    background: var(--aura-gold);
+    color: var(--aura-dark);
+}
+.btn-aura-gold:hover {
+    background: var(--aura-gold-deep);
+    color: var(--aura-surface);
+}
+
+.btn-aura-outline {
+    background: transparent;
+    border-color: currentColor;
+    color: inherit;
+}
+.btn-aura-outline:hover {
+    background: rgba(0, 0, 0, .05);
+}
+
+/* Salla web components accept a class attribute — reuse the same tokens
+   so <salla-button class="aura-wishlist-btn"> matches the rest of the UI. */
+.aura-wishlist-btn {
+    --icon-color: var(--aura-ink);
+}

@@ -1,0 +1,83 @@
+{#
+| Variable                   | Type        | Description                                                          |
+|----------------------------|-------------|------------------------------------------------------------------------|
+| page                       | object      |                                                                        |
+| page.title                 | string      | *could be html                                                         |
+| page.slug                  | string      | ex: "cat.show"                                                         |
+| category                   | ?Category   |                                                                        |
+| category.name              | string      |                                                                        |
+| category.image             | ?string     |                                                                        |
+| filters                    | bool        | is filters allowed here or not                                        |
+| sort_options[]             | SortList[]  |                                                                        |
+| search_query               | ?string     |                                                                        |
+#}
+{% extends "layouts.master" %}
+{% block content %}
+    {% if theme.settings.get('product_index_show_breadcrumbs', true) %}
+        <div class="container container--breadcrumbs">
+            <nav class="breadcrumbs w-full py-5">
+                <salla-breadcrumb></salla-breadcrumb>
+            </nav>
+        </div>
+    {% endif %}
+
+    {% if category %}
+        <div class="container aura-cat-head">
+            <span class="aura-eyebrow aura-eyebrow--ink">{{ category.parent.name ?? store.name }}</span>
+            <h1 class="aura-cat-head__title">{{ category.name }}</h1>
+            {% if category.description %}
+                <p class="aura-cat-head__desc">{{ category.description|raw }}</p>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <div class="s-blocks-wrapper s-before-products-list !mt-0">{% hook 'product.index.before_products_group_with_filter' %}</div>
+
+    <div class="container container--products-list aura-cat-layout">
+        {% if filters %}
+            <button class="btn--close-sm close-filters sicon-cancel hidden"></button>
+            <salla-filters data-testid="store-products-filters" class="aura-cat-filters" id="filters-menu"></salla-filters>
+        {% endif %}
+
+        <div class="aura-cat-main">
+            <div class="aura-cat-toolbar">
+                <h2 class="sr-only" id="page-main-title">{{ page.title|raw }}</h2>
+                {% if filters %}
+                    <a data-testid="store-products-filters-mobile-trigger" href="#filters-menu" class="filters-trigger lg:hidden">
+                        <i class="sicon-filter"></i> تصفية النتائج
+                    </a>
+                {% endif %}
+                {% if sort_options|length %}
+                    <div class="aura-cat-sort">
+                        <label for="product-filter">{{ trans('pages.categories.sorting') }}</label>
+                        <select id="product-filter" class="form-input">
+                            {% for sort in sort_options %}
+                                <option value="{{ sort.id }}" {{ sort.is_selected?'selected':'' }}>{{ sort.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                {% endif %}
+            </div>
+
+            {% hook 'product:index.items.start' %}
+
+            <salla-products-list data-testid="store-products-list" class="aura-products__list"
+                                  source="{{ page.slug }}" source-value="{{ page.id }}"
+                                  {{ filters ?'filters-Results':'' }}></salla-products-list>
+
+            {% hook 'product:index.items.end' %}
+        </div>
+    </div>
+
+    <div class="s-blocks-wrapper s-after-products-list">{% hook 'product.index.after_products_group_with_filter' %}</div>
+
+    {% if store.settings.category.testimonial_enabled %}
+        {% component 'home.testimonials' %}
+    {% endif %}
+
+    <div class="s-blocks-wrapper s-after-testimonials">{% hook 'product.index.after_testimonials' %}</div>
+{% endblock %}
+
+{% block scripts %}
+    <script defer src="{{ 'product.js' | asset }}"></script>
+{% endblock %}

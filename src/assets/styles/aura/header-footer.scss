@@ -1,0 +1,110 @@
+/* ===== Aura / header ===== */
+
+.aura-header {
+    background: var(--aura-bg);
+}
+
+.aura-topbar {
+    background: var(--aura-dark);
+    color: var(--aura-surface);
+    font-size: 12.5px;
+}
+.aura-topbar .container { height: 40px; }
+.topnav-is-dark .aura-topbar { background: var(--aura-dark); }
+
+.aura-mainnav {
+    border-bottom: 1px solid var(--aura-line);
+}
+
+.aura-logo img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+custom-main-menu {
+    display: block;
+}
+custom-main-menu a {
+    font-size: 14.5px;
+    font-weight: 600;
+    padding: 0 14px;
+}
+
+.aura-icon-btn {
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--aura-ink);
+}
+.aura-icon-btn:hover { background: var(--aura-bg-soft); }
+
+.aura-cart-summary .header-btn__icon { font-size: 20px; }
+
+/* ===== Aura / footer ===== */
+
+.aura-footer {
+    background: var(--aura-dark-2);
+    color: var(--aura-surface);
+    margin-top: 100px;
+}
+.footer-is-light .aura-footer {
+    background: var(--aura-bg-soft);
+    color: var(--aura-ink);
+}
+
+.aura-footer__grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+    gap: 40px;
+    padding: 70px 0 40px;
+}
+@media (max-width: 900px) {
+    .aura-footer__grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+    .aura-footer__grid { grid-template-columns: 1fr; }
+}
+
+.aura-footer__logo img { height: 32px; }
+.aura-footer__desc {
+    color: oklch(70% 0.01 85);
+    font-size: 13.5px;
+    line-height: 1.9;
+    max-width: 280px;
+    margin-top: 16px;
+}
+.aura-footer__social { margin-top: 24px; }
+
+.aura-footer__col h3 {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 20px;
+    color: inherit;
+}
+.aura-footer__col a {
+    display: block;
+    font-size: 13.5px;
+    color: oklch(75% 0.01 85);
+    margin-bottom: 12px;
+}
+.footer-is-light .aura-footer__col a,
+.footer-is-light .aura-footer__desc { color: var(--aura-ink-soft); }
+
+.aura-footer__bottom {
+    border-top: 1px solid oklch(32% 0.01 85);
+    padding: 22px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12.5px;
+    color: oklch(65% 0.01 85);
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.footer-is-light .aura-footer__bottom { border-top-color: var(--aura-line); color: var(--aura-muted); }
+
+.aura-footer__badges { display: flex; align-items: center; gap: 16px; }

@@ -1,0 +1,42 @@
+<footer data-testid="store-footer" class="aura-footer">
+    <div class="container aura-footer__grid">
+
+        <div class="aura-footer__brand">
+            <a href="{{ link('/') }}" class="aura-footer__logo">
+                {% if store.logo %}
+                    <img src="{{ store.logo|cdn(120) }}" alt="{{ store.name }}" width="120" height="40">
+                {% else %}
+                    <h3>{{ store.name }}</h3>
+                {% endif %}
+            </a>
+            {% if store.description %}
+                <div class="aura-footer__desc">{{ store.description|raw }}</div>
+            {% endif %}
+            <div class="aura-footer__social">
+                <salla-social data-testid="store-footer-social"></salla-social>
+            </div>
+        </div>
+
+        <div class="aura-footer__col">
+            <h3>{{ trans('blocks.footer.pages_links') }}</h3>
+            <salla-menu data-testid="store-footer-menu" source="footer" with-cookie-preferences></salla-menu>
+        </div>
+
+        <div class="aura-footer__col">
+            <h3>{{ trans('common.titles.contact_us') }}</h3>
+            <salla-contacts data-testid="store-footer-contacts"></salla-contacts>
+        </div>
+
+        <div class="aura-footer__col aura-footer__newsletter-col">
+            <salla-apps-icons data-testid="store-footer-apps"></salla-apps-icons>
+        </div>
+    </div>
+
+    <div class="aura-footer__bottom container">
+        <span class="aura-footer__copyright">{% hook copyright %}</span>
+        <div class="aura-footer__badges">
+            <salla-trust-badges data-testid="store-footer-trust-badges" {% if theme.settings.get('footer_is_dark') %} dark {% endif %}></salla-trust-badges>
+            <salla-payments data-testid="store-footer-payments"></salla-payments>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,204 @@
+/* =====================================================================
+   Aura / utility pages
+   Styling for the pages that round out full Salla page-group coverage:
+   customer account, blog, brands, loyalty and static/landing pages.
+   These are lighter-touch than the hero/product/cart surfaces — the goal
+   here is a clean, on-brand "chrome" around Salla's real components
+   (salla-orders, salla-notifications, salla-wallet, salla-comments...)
+   rather than a from-scratch layout, since these are functional/utility
+   screens where reliability matters more than bespoke art direction.
+   ===================================================================== */
+
+/* ----- generic helpers (ported from Salla's base theme conventions) ----- */
+
+.flex-center { @apply flex justify-center items-center; }
+.center-between { @apply flex justify-between items-center; }
+.center-v { @apply flex items-center; }
+
+.form-label {
+    @apply block text-sm font-bold text-aura-ink-soft mb-2.5 md:mb-0 sm:mt-px;
+}
+.form-input {
+    @apply w-full h-10 transition-colors duration-300 focus:ring-transparent focus:border-primary text-sm border-aura-line rounded-none bg-transparent;
+    appearance: none;
+    -webkit-appearance: none;
+}
+textarea.form-input { @apply h-24; }
+.has-error { @apply border-red-400 focus:border-red-500; }
+.has-success { @apply border-green-500 focus:border-green-600; }
+
+.no-content-placeholder {
+    @apply h-full text-aura-muted pt-10 pb-20 flex items-center flex-col justify-center;
+    .icon { @apply text-5xl mb-4 w-32 h-32 flex justify-center items-center rounded-full bg-aura-bg-soft text-aura-muted; }
+    p { @apply text-base text-aura-muted mb-4; }
+}
+
+.rounded-icon { @apply w-16 h-16 flex justify-center items-center rounded-full text-2xl; }
+
+.gradient-bg {
+    @apply from-primary to-primary-d;
+    [dir="ltr"] & { @apply bg-gradient-to-r; }
+    [dir="rtl"] & { @apply bg-gradient-to-l; }
+}
+
+/* Card surface used across all utility pages instead of Raed's `bg-white
+   rounded-md shadow-*` combo — matches Aura's flat, hairline-bordered look. */
+.aura-account-card {
+    @apply bg-aura-surface border border-aura-line;
+    border-radius: 0;
+}
+
+/* ----- customer account ----- */
+
+.aura-account-sidebar {
+    @apply bg-aura-surface border border-aura-line;
+    border-radius: 0;
+}
+.aura-account-title {
+    font-family: 'Markazi Text', var(--font-display), serif;
+    font-weight: 600;
+    font-size: 26px;
+}
+
+.profile-header {
+    @apply relative lg:h-48 overflow-hidden;
+    .breadcrumbs {
+        @screen lg { @apply mt-2.5; }
+        a { @apply text-primary-reverse hover:opacity-80; }
+        span { @apply text-primary-reverse opacity-80; }
+        .arrow { @apply text-primary-reverse opacity-70; }
+    }
+}
+
+.rating-header { @apply relative p-5 text-primary-reverse; }
+
+.single-order-header-item {
+    @media (max-width: 768px) { @apply flex justify-between items-center; }
+}
+
+.rating-actions {
+    @apply flex items-center gap-2;
+    salla-button button { @apply rounded mx-0 w-8 h-8 #{!important}; }
+}
+
+.form--user-profile {
+    .s-file-upload-wrapper {
+        min-height: 120px;
+        .filepond--list-scroller { overflow-y: inherit !important; }
+        .filepond--drop-label {
+            min-height: 120px !important;
+            @apply bg-aura-bg-soft cursor-pointer border-dashed border border-aura-line;
+        }
+        .profile-filepond-placholder {
+            @apply flex flex-col justify-center items-center;
+            &-icon { @apply mb-1; i { color: var(--aura-muted); @apply text-xl; } }
+        }
+    }
+}
+
+/* ----- thank-you page ----- */
+
+.thankyou-breadcrumbs {
+    a { @apply text-primary-reverse hover:opacity-80; }
+    li { @apply text-primary-reverse opacity-80; }
+    svg { @apply fill-primary-reverse opacity-70; }
+}
+.thankyou-block {
+    @apply duration-500 hover:shadow-default flex-1 bg-aura-surface border border-aura-line p-8 mb-6 md:mb-8 flex flex-col items-center justify-center;
+}
+
+/* ----- blog ----- */
+
+.blog-slider { border-radius: 0; }
+.dropdown-toggler {
+    @apply inline-flex items-center lg:h-full w-10 mx-0 text-aura-muted;
+    &.cat-filter {
+        @apply static w-auto;
+        .dropdown__trigger { @apply rounded-none w-auto h-auto overflow-visible; }
+    }
+}
+.dropdown__trigger { @apply rounded-full overflow-hidden w-10 h-10 font-medium; }
+.dropdown__menu {
+    @apply origin-top-right duration-200 transition-all scale-y-90 absolute opacity-0 -translate-y-4 invisible rtl:left-0 ltr:right-0 z-30 w-80 lg:w-60 shadow-default bg-aura-surface border border-aura-line top-full;
+    outline: none;
+}
+.dropdown-toggler.is-opened .dropdown__menu { @apply opacity-100 visible translate-y-0 scale-100; }
+
+/* ----- brands ----- */
+
+.brands-nav {
+    @apply flex flex-wrap justify-center rtl:space-x-reverse space-x-2 space-y-2;
+    &__item {
+        @apply flex items-center justify-center hover:shadow-sm focus:border-primary text-sm w-10 h-10 bg-aura-surface border border-aura-line text-aura-muted p-1 transition;
+        &.is-selected { @apply bg-aura-gold text-aura-dark border-aura-gold #{!important}; }
+        span { @apply pointer-events-none; }
+    }
+}
+.brand-char {
+    @apply rtl:ml-5 ltr:mr-5 rtl:md:ml-12 ltr:md:mr-12 bg-aura-surface border border-aura-line w-10 h-10 flex items-center transition justify-center hover:shadow-sm text-sm;
+}
+.brand-item {
+    @apply flex justify-center items-center bg-aura-surface border border-aura-line transition hover:opacity-90 bg-cover h-20 sm:h-24 md:h-32 text-center p-3 sm:p-4 md:p-8 overflow-hidden relative;
+}
+
+/* ----- loyalty ----- */
+
+.loyalty {
+    .breadcrumbs {
+        @apply pb-0 pt-4;
+        ol { @apply justify-center lg:justify-start; }
+        a, span, .arrow { @apply text-white/90; text-shadow: 1px 1px 0 rgba(0, 0, 0, .3); }
+    }
+    &__banner {
+        @apply relative overflow-hidden bg-aura-surface border border-aura-line m-auto p-10 lg:py-16 lg:px-20 mb-28 mt-20 shadow-default;
+        &-inner { @apply relative z-10 text-center sm:flex flex-1 items-center rtl:space-x-reverse sm:space-x-12; }
+        &-content {
+            @apply md:flex flex-1 justify-between items-center;
+            .info {
+                @apply mb-6 md:mb-0;
+                h1 { @apply font-bold text-3xl mb-2.5; }
+                p { @apply text-aura-muted max-w-xs leading-6 mb-2; }
+            }
+        }
+        .loyalty-points {
+            @apply text-sm text-aura-muted;
+            .count-number { @apply text-4xl text-aura-gold-deep font-bold ltr:ml-2.5 rtl:mr-2.5; }
+        }
+    }
+    &-star {
+        @apply absolute z-0 transform opacity-70;
+        i { @apply text-aura-bg-soft text-[400px]; }
+        &--first { @apply -right-24 -top-48 -rotate-45; }
+        &--second { @apply -left-16 -bottom-40 -rotate-90; }
+    }
+    .product-entry__image { flex-shrink: unset; }
+}
+
+.points-ways {
+    &__list {
+        @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-8;
+        .way-item {
+            @apply flex flex-col bg-aura-surface border border-aura-line w-full opacity-100 shadow-default p-6;
+            &__icon {
+                @apply flex shrink-0 items-center justify-center relative h-12 w-12;
+                span { @apply absolute z-0 w-full h-full inset-0 rounded-full opacity-10; }
+            }
+            &__content {
+                @apply flex flex-col justify-start;
+                h4 { @apply font-bold text-xl break-all; }
+                p { @apply text-sm text-aura-muted; }
+            }
+            &__action { @apply mt-auto pt-4; }
+        }
+    }
+}
+
+.aura-section-eyebrow { color: var(--aura-ink); }
+
+/* ----- static / landing page ----- */
+
+.content .content-entry {
+    img { margin: 15px 0 25px; }
+    ul, li { list-style: inherit !important; }
+    ol { list-style: auto !important; }
+}

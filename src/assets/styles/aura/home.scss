@@ -1,0 +1,192 @@
+/* ===== Aura / home: hero ===== */
+
+.aura-hero { padding: 56px 0; }
+.aura-hero__slide {
+    position: relative;
+    min-height: 560px;
+    display: flex;
+    align-items: center;
+}
+.aura-hero__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+}
+.aura-hero__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to left, oklch(12% 0.02 85 / .55), transparent 60%);
+}
+.aura-hero__inner { position: relative; width: 100%; }
+.aura-hero__content {
+    max-width: 460px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    color: var(--aura-surface);
+    padding: 40px 0;
+}
+.aura-hero__title {
+    font-family: 'Markazi Text', var(--font-display), serif;
+    font-weight: 600;
+    font-size: 60px;
+    line-height: 1.15;
+    margin: 0;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, .25);
+}
+.aura-hero__desc {
+    font-size: 15px;
+    line-height: 1.9;
+    color: oklch(96% 0.005 85);
+    margin: 0;
+}
+
+/* ===== Aura / home: category tiles ===== */
+
+.aura-tiles { padding: 20px 0 90px; }
+.aura-tiles__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+.aura-tiles__grid--2, .aura-tiles__grid--4 { grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 768px) {
+    .aura-tiles__grid--2 { grid-template-columns: repeat(2, 1fr); }
+    .aura-tiles__grid--4 { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 640px) {
+    .aura-tiles__grid { grid-template-columns: repeat(2, 1fr); }
+}
+.aura-tile {
+    position: relative;
+    display: block;
+    height: 300px;
+    overflow: hidden;
+}
+.aura-tile__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--aura-bg-soft);
+    transition: transform .5s ease;
+}
+.aura-tile:hover .aura-tile__bg { transform: scale(1.04); }
+.aura-tile__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, oklch(10% 0.02 85 / .5), transparent 55%);
+}
+.aura-tile__label {
+    position: absolute;
+    bottom: 20px;
+    inset-inline-end: 20px;
+    color: var(--aura-surface);
+    font-family: 'Markazi Text', var(--font-display), serif;
+    font-size: 24px;
+    margin: 0;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, .3);
+}
+
+/* ===== Aura / home: featured products row ===== */
+
+.aura-products { padding: 0 0 90px; }
+
+/* ===== Aura / home: store features strip ===== */
+
+.aura-features { background: var(--aura-bg-soft); padding: 44px 0; }
+.aura-features__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+@media (max-width: 720px) {
+    .aura-features__grid { grid-template-columns: 1fr; }
+}
+.aura-features__item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    justify-content: center;
+    text-align: start;
+}
+.aura-features__item i { font-size: 28px; color: var(--aura-gold-deep); }
+.aura-features__item h4 { font-weight: 700; font-size: 15px; margin: 0 0 4px; }
+.aura-features__item p { font-size: 13px; color: var(--aura-muted); margin: 0; }
+
+/* ===== Aura / home: split promo ===== */
+
+.aura-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 720px) {
+    .aura-split { grid-template-columns: 1fr; }
+}
+.aura-split__panel {
+    position: relative;
+    display: block;
+    height: 420px;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--aura-bg-soft);
+}
+.aura-split__content {
+    position: absolute;
+    bottom: 36px;
+    inset-inline-end: 44px;
+}
+.aura-split__content h3 {
+    font-family: 'Markazi Text', var(--font-display), serif;
+    font-weight: 600;
+    font-size: 30px;
+    color: var(--aura-ink);
+    margin: 0 0 14px;
+}
+
+/* ===== Aura / home: newsletter ===== */
+
+.aura-newsletter { background: var(--aura-dark); padding: 80px 0; }
+.aura-newsletter__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    color: var(--aura-surface);
+}
+.aura-newsletter__inner h2 {
+    font-family: 'Markazi Text', var(--font-display), serif;
+    font-weight: 600;
+    font-size: 32px;
+    margin: 0;
+}
+.aura-newsletter__inner p {
+    font-size: 14px;
+    color: oklch(75% 0.01 85);
+    max-width: 420px;
+    margin: 0;
+    line-height: 1.8;
+}
+.aura-newsletter__form {
+    display: flex;
+    margin-top: 8px;
+}
+.aura-newsletter__form input {
+    width: 320px;
+    max-width: 60vw;
+    height: 50px;
+    background: transparent;
+    border: 1px solid oklch(45% 0.01 85);
+    color: var(--aura-surface);
+    padding: 0 18px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+}
+.aura-newsletter__form .btn-aura-gold { height: 50px; border-radius: 0; }
+
+/* ===== Aura / home: testimonials ===== */
+
+.aura-testimonials { padding: 20px 0 90px; }

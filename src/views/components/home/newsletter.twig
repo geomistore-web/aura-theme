@@ -1,0 +1,22 @@
+{#
+| Variable              | Type   | Description                                                        |
+|-----------------------|--------|----------------------------------------------------------------------|
+| component             | object | Merchant-filled fields from twilight.json `home.newsletter`         |
+| component.heading     | string |                                                                      |
+| component.description | ?string|                                                                      |
+| position              | int    |                                                                      |
+
+Note: this block is presentational only in this starter kit — wire the
+form up to your newsletter provider (e.g. a Salla marketing app, or a
+custom endpoint) before relying on it to actually collect emails.
+#}
+<section component-id="{{ componentId }}" data-testid="store-home-newsletter" class="aura-newsletter">
+    <div class="container aura-newsletter__inner">
+        <h2>{{ component.heading }}</h2>
+        {% if component.description %}<p>{{ component.description }}</p>{% endif %}
+        <form class="aura-newsletter__form" onsubmit="return false;">
+            <input type="email" required placeholder="{{ trans('common.forms.email') }}">
+            <button type="submit" class="btn-aura-gold">اشتراك</button>
+        </form>
+    </div>
+</section>

@@ -1,0 +1,16 @@
+/*
+ * Aura — luxury Salla theme
+ * Tailwind provides the utility layer (layout primitives, spacing scale);
+ * the "aura" partials below are hand-written CSS implementing Aura's own
+ * visual identity on top of Salla's real Twilight components & markup.
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './aura/base';
+@import './aura/buttons';
+@import './aura/header-footer';
+@import './aura/home';
+@import './aura/shop';
+@import './aura/pages';

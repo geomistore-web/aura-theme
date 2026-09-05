@@ -1,0 +1,178 @@
+{#
+| Variable                    | Type    | Description                                                |
+|------------------------------|---------|--------------------------------------------------------------|
+| product                     | Product | See Salla's Twilight docs for the full Product reference     |
+| product.images[]            | array   |                                                              |
+| product.options             | array   | @see views/pages/partials/product/options.twig               |
+
+This is a trimmed, Aura-styled adaptation of Raed's product/single.twig —
+it covers the common path (gallery, price, options, quantity, add to
+cart, description, related products). Edge-case product types
+(donations, 3D models, pre-order campaigns, gifting, loyalty) from the
+base theme are not ported here; add them back from theme-raed if your
+catalogue needs them.
+#}
+{% extends "layouts.master" %}
+{% block content %}
+    {% if theme.settings.get('product_show_breadcrumbs', true) %}
+        <div class="container container--breadcrumbs">
+            <nav class="breadcrumbs w-full py-5">
+                <salla-breadcrumb></salla-breadcrumb>
+            </nav>
+        </div>
+    {% endif %}
+
+    <div class="s-blocks-wrapper s-before-product-info !mt-0">{% hook 'product.single.before_product_info' %}</div>
+
+    <div class="container container--product-details">
+        <div class="aura-product" id="product-{{ product.id }}">
+
+            {# Gallery #}
+            <div class="aura-product__gallery">
+                {% set has_many_images = product.images|length > 1 %}
+                <salla-slider data-testid="store-product-image-slider"
+                              id="details-slider-{{ product.id }}"
+                              class="aura-product__slider"
+                              type="thumbs" loop="false" auto-height
+                              listen-to-thumbnails-option show-thumbs-controls="false">
+
+                    {% if product.promotion_title %}
+                        <div class="promotion-title aura-badge">{{ product.promotion_title }}</div>
+                    {% endif %}
+
+                    <salla-button class="btn--wishlist aura-wishlist-btn" data-id="{{ product.id }}"
+                                  onclick="salla.wishlist.toggle('{{ product.id }}')" shape="icon" fill="outline" color="light">
+                        <i class="sicon-heart"></i>
+                    </salla-button>
+
+                    <div slot="items">
+                        {% for image in product.images %}
+                            <a data-fslightbox="product_{{ product.id }}" data-img-id="{{ image.id }}"
+                               data-slid-index="{{ loop.index-1 }}" data-caption="{{ image.alt }}" data-infinite="false"
+                               href="{{ image.url }}" aria-label="{{ product.name }}" class="swiper-slide aura-product__slide">
+                                <img id="{{ image.id }}" loading="{{ loop.first ? 'eager' : 'lazy' }}"
+                                     src="{{ image.url }}" alt="{{ image.alt }}" class="w-full h-full object-cover">
+                            </a>
+                        {% endfor %}
+                    </div>
+
+                    {% if has_many_images %}
+                        <div data-testid="store-product-thumbnails" slot="thumbs">
+                            {% for image in product.images %}
+                                <div class="slide--one-fourth aura-product__thumb" data-caption="{{ image.alt }}">
+                                    <img src="{{ image.url }}" loading="{{ loop.index < 5 ? 'eager' : 'lazy' }}"
+                                         class="w-full h-full object-cover" alt="{{ image.alt }}"/>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </salla-slider>
+            </div>
+
+            {# Info #}
+            <div class="aura-product__info">
+                {% hook 'product:single.description.start' %}
+
+                {% if product.category %}<span class="aura-eyebrow aura-eyebrow--ink">{{ product.category.name }}</span>{% endif %}
+                <h1 data-testid="store-product-title" class="aura-product__title">{{ product.name }}</h1>
+                {% if product.subtitle %}<h2 class="aura-product__subtitle">{{ product.subtitle }}</h2>{% endif %}
+
+                {% if product.rating %}
+                    <salla-rating-stars data-testid="store-product-rating" value="{{ product.rating.stars }}"
+                                        reviews="{{ product.rating.count }}"></salla-rating-stars>
+                {% endif %}
+
+                <div data-testid="store-product-price" class="aura-product__price">
+                    <div class="{{ product.is_on_sale ? '' : 'hidden' }} aura-price-row">
+                        <span class="aura-price aura-price--sale">{{ product.sale_price|money }}</span>
+                        <span class="aura-price-old">{{ product.regular_price|money }}</span>
+                    </div>
+                    <div class="{{ product.is_on_sale ? 'hidden' : 'flex' }} aura-price-row">
+                        {% if product.starting_price %}<span class="aura-muted">{{ trans('pages.products.starting_price') }}</span>{% endif %}
+                        <span class="aura-price">{{ product.starting_price ? product.starting_price|money : product.price|money }}</span>
+                    </div>
+                </div>
+
+                <div data-testid="store-product-description" class="aura-product__desc">
+                    {% set product_desc = product.description|replace({"&nbsp;":"\n"}) %}
+                    {% if product.has_read_more %}
+                        <article class="article article--main" id="more-content" style="max-height:5.25rem">{{ product_desc|raw }}</article>
+                        <a id="btn-show-more" class="aura-link">{{ trans('pages.products.read_more') }}</a>
+                    {% else %}
+                        <article class="article--main">{{ product_desc|raw }}</article>
+                    {% endif %}
+                </div>
+
+                {% hook 'product:single.description' %}
+
+                <form data-testid="store-product-form" class="aura-product__form" enctype="multipart/form-data" method="post"
+                      onsubmit="return salla.form.onSubmit('cart.addItem', event)">
+                    <input type="hidden" name="id" value="{{ product.id }}">
+
+                    {% hook 'product:single.form.start' %}
+                    {% include 'pages.partials.product.options' %}
+                    {% hook 'product:single.form.end' %}
+
+                    <div class="aura-product__buybox">
+                        {% if product.is_hidden_quantity or product.type == 'booking' %}
+                            <input type="hidden" value="1" name="quantity" aria-label="Quantity"/>
+                        {% else %}
+                            <div class="aura-qty-row">
+                                <label class="aura-qty-label">{{ trans('pages.products.quantity') }}</label>
+                                <salla-quantity-input data-testid="store-product-quantity" max="{{ product.max_quantity }}"
+                                                       value="1" name="quantity" aria-label="Quantity"></salla-quantity-input>
+                            </div>
+                        {% endif %}
+
+                        <div class="aura-buybox__actions">
+                            <salla-add-product-button data-testid="store-product-add-to-cart"
+                                    {{ product.can_quick_buy ? 'quick-buy' : '' }}
+                                    {{ product.is_require_shipping ? 'required-shipping' : '' }}
+                                    amount="{{ product.base_currency_price }}"
+                                    class="aura-add-to-cart"
+                                    product-status="{{ product.status }}"
+                                    product-type="{{ product.type }}"
+                                    product-id="{{ product.id }}"
+                                    loader-position="end" type="submit" width="wide">
+                                {{ product.add_to_cart_label }}
+                            </salla-add-product-button>
+                            <salla-button data-testid="store-product-wishlist-btn" class="aura-wishlist-btn aura-wishlist-btn--desktop"
+                                          data-id="{{ product.id }}" onclick="salla.wishlist.toggle('{{ product.id }}')"
+                                          shape="icon" fill="outline" color="light" aria-label="add to wishlist">
+                                <i class="sicon-heart"></i>
+                            </salla-button>
+                        </div>
+                    </div>
+                </form>
+
+                {% hook 'product:single.description.end' %}
+
+                <div class="aura-trust-row">
+                    <div><i class="sicon-shipping-fast"></i><span>شحن سريع</span></div>
+                    <div><i class="sicon-refresh"></i><span>إرجاع خلال 14 يوم</span></div>
+                    <div><i class="sicon-shield-check"></i><span>دفع آمن</span></div>
+                </div>
+            </div>
+        </div>
+        <salla-offer data-testid="store-product-offer"></salla-offer>
+    </div>
+
+    <div class="s-blocks-wrapper s-before-reviews">{% hook 'product.single.before_customer_reviews' %}</div>
+
+    {% if store.settings.rating.show_on_product %}
+        <salla-comments data-testid="store-product-comments" item-id="{{ product.id }}" type="product"></salla-comments>
+    {% endif %}
+
+    <div class="s-blocks-wrapper s-before-related">{% hook 'product.single.before_product_recommendations' %}</div>
+
+    <div class="container aura-related">
+        <salla-products-slider data-testid="store-product-related" source="related" source-value="{{ product.id }}"
+                                block-title="قد يعجبك أيضًا" display-all-url></salla-products-slider>
+    </div>
+
+    <div class="s-blocks-wrapper s-after-related">{% hook 'product.single.after_product_recommendations' %}</div>
+{% endblock %}
+
+{% block scripts %}
+    <script defer src="{{ 'product.js' | asset }}"></script>
+{% endblock %}

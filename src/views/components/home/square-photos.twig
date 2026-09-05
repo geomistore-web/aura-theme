@@ -1,0 +1,32 @@
+{#
+| Variable          | Type   | Description                                                      |
+|-------------------|--------|--------------------------------------------------------------------|
+| title             | string | Section title                                                    |
+| items[]           | array  | List of images                                                   |
+| items[].url       | string |                                                                    |
+| items[].link_type | string | category,product,offers,page,external_link,brand                |
+| items[].image.url | string |                                                                    |
+| items[].image.alt | string |                                                                    |
+| items[].text      | string | Visible title for the photo                                      |
+| position          | Int    | Sorting number start from zero                                   |
+#}
+<section component-id="{{ componentId }}" data-testid="store-home-square-photos" class="aura-tiles">
+    <div class="container">
+        {% if title %}
+            <div class="aura-section-head">
+                <h2 class="aura-section-title">{{ title }}</h2>
+            </div>
+        {% endif %}
+        <div class="aura-tiles__grid aura-tiles__grid--{{ items|length }}">
+            {% for item in items %}
+                <a class="aura-tile" href="{{ item.url }}" {% if item.link_type == 'external_link' %}target="_blank"{% endif %}>
+                    <div class="aura-tile__bg lazy" data-bg="{{ item.image.url }}" style="background-image:url('{{ item.image.url }}');"></div>
+                    {% if item.text %}
+                        <div class="aura-tile__scrim"></div>
+                        <h3 class="aura-tile__label">{{ item.text }}</h3>
+                    {% endif %}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>

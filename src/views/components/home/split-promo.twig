@@ -1,0 +1,20 @@
+{#
+| Variable                    | Type     | Description                                                            |
+|------------------------------|----------|------------------------------------------------------------------------|
+| component                   | object   | Merchant-filled fields from twilight.json `home.split-promo` component |
+| component.banners[].image   | string   |                                                                        |
+| component.banners[].title   | string   |                                                                        |
+| component.banners[].cta_text| ?string  |                                                                        |
+| component.banners[].url     | ?string  |                                                                        |
+| position                    | int      |                                                                        |
+#}
+<section component-id="{{ componentId }}" data-testid="store-home-split-promo" class="aura-split">
+    {% for banner in component.banners %}
+        <a href="{{ banner.url ?: '#' }}" class="aura-split__panel" style="background-image:url({{ banner.image }});">
+            <div class="aura-split__content">
+                <h3>{{ banner.title }}</h3>
+                {% if banner.cta_text %}<span class="btn-aura-outline">{{ banner.cta_text }}</span>{% endif %}
+            </div>
+        </a>
+    {% endfor %}
+</section>
